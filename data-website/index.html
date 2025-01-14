@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stop Plastic</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div id="circle-cursor"></div>
+    <script src="./js/main.js"></script>
+    <nav class="navbar">
+      <!-- <img src="./images/logo.png" alt="Logo" class="logo" /> -->
+      <ul class="nav-list">
+        <li class="nav-item"><a href="#home">ACCEUIL</a></li>
+        <li class="nav-item"><a href="#explore">A PROPOS</a></li>
+        <li class="nav-item"><a href="#gallery">PRESENTATION</a></li>
+      </ul>
+      <div class="hidden-menu" id="hiddenMenu">
+        <ul class="menu-list">
+          <li class="menu-item"><a href="#home">ACCEUIL</a></li>
+          <li class="menu-item"><a href="#explore">A PROPOS</a></li>
+          <li class="menu-item"><a href="#gallery">PRESENTATION</a></li>
+        </ul>
+      </div>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    </nav>
+    <div id="home" class="first-container">
+      <img src="./images/coverr.png" alt="Background" class="bg" />
+      <div class="scroll-down">
+        <span>Scroll Down</span>
+
+        <div class="arrows">
+          <div class="arrow"></div>
+          <div class="arrow"></div>
+          <div class="arrow"></div>
+        </div>
+      </div>
+    </div>
+
+    <section id="explore" class="new-section">
+      <div class="content">
+        <div class="left-side"></div>
+        <div class="right-side">
+          <div class="text-button-container">
+            <div class="presentation">
+              <h1>PRESENTATION DU PROJET</h1>
+            </div>
+            <p>
+              <span
+                style="color: #d26c91; font-weight: bold; font-style: italic"
+                >Stop Plastic</span
+              >
+              est un site web créé par
+              <span style="font-weight: bold">Phuong Nguyen</span> dans le cadre
+              d'un projet d'étude du Master CEN à l'université de Paris 8.
+              Utilisant JavaScript, Flourish et RawGraphs, le projet explore la
+              pollution plastique à travers des visualisations interactives.
+              L'objectif est de sensibiliser le public à l'ampleur de ce défi
+              environnemental en présentant des données sur la production, la
+              distribution et l'impact des déchets plastiques.
+            </p>
+            <a href="#data" class="btn">Découvrez les data-visualisations</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Section fact -->
+    <section id="gallery" class="gallery-up-down">
+      <div class="gallery-text">
+        <h2>Marine Pollution</h2>
+        <p>Facts you should know</p>
+      </div>
+      <div class="gallery-container">
+        <!-- Facts de gauche -->
+        <div class="facts-container facts-left">
+          <div class="fact-item fact-01">
+            <div class="fact-number">01</div>
+            <div class="fact-text">
+              60 à 90 % des déchets marins sont constitués de plastique.
+            </div>
+          </div>
+
+          <div class="fact-item fact-02">
+            <div class="fact-number">02</div>
+            <div class="fact-text">
+              Plus de 50 % des tortues marines ont ingéré du plastique.
+            </div>
+          </div>
+
+          <div class="fact-item fact-03">
+            <div class="fact-number">03</div>
+            <div class="fact-text">
+              Un citoyen américain moyen consomme 167 bouteilles d'eau en
+              plastique chaque année.
+            </div>
+          </div>
+        </div>
+
+        <img src="./images/whale.png" alt="Gallery 1" class="gallery-item" />
+        <!-- Facts de droite -->
+        <div class="facts-container facts-right">
+          <div class="fact-item fact-04">
+            <div class="fact-number">04</div>
+            <div class="fact-text">
+              70 % des déchets plastiques retrouvés dans les océans sont des
+              produits à usage unique.
+            </div>
+          </div>
+
+          <div class="fact-item fact-05">
+            <div class="fact-number">05</div>
+            <div class="fact-text">
+              Les déchets plastiques tuent chaque année jusqu'à 1 million
+              d'oiseaux marins.
+            </div>
+          </div>
+
+          <div class="fact-item fact-06">
+            <div class="fact-number">06</div>
+            <div class="fact-text">
+              Chaque seconde, plus de 200 kilos de déchets plastiques se
+              retrouvent dans l'océan.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Section video -->
+    <section class="third-section">
+      <div class="third-container">
+        <p>
+          D'ici 2050, la production et l'élimination des plastiques pourraient
+          générer des émissions de gaz à effet de serre équivalentes à celles de
+          615 centrales à charbon chaque année et consommer jusqu'à 13 % du
+          budget carbone restant de la Terre.
+        </p>
+        <video id="myVideo" autoplay loop muted>
+          <source src="./images/vid1.mp4" type="video/mp4" />
+          <track
+            src="./subtitles/plastic.vtt"
+            kind="subtitles"
+            srclang="en"
+            label="English"
+          />
+        </video>
+      </div>
+    </section>
+    <div class="marquee">
+      <div class="marquee-content">
+        <p>Comment les plastiques affectent la vie ?</p>
+      </div>
+    </div>
+
+    <!-- <-- Data visualisation section  -->
+    <div id="data" class="data">
+      <div class="data-container">
+        <h2>La hiérarchie mondiale des producteurs de déchets plastiques</h2>
+        <p class="text-up-down">
+          Cette visualisation hiérarchique met en lumière la distribution
+          complexe de la production de déchets plastiques à l'échelle mondiale.
+          Le graphique représente différents pays et leurs contributions
+          respectives au volume global de déchets plastiques, permettant de
+          mettre en évidence les principaux acteurs responsables de cette
+          pollution environnementale. Les niveaux de la hiérarchie révèlent les
+          disparités entre les nations, montrant comment certains pays génèrent
+          significativement plus de déchets plastiques que d'autres, offrant
+          ainsi une perspective visuelle claire et immédiate des enjeux de la
+          pollution plastique à l'échelle internationale.
+        </p>
+      </div>
+      <div class="data-item">
+        <div
+          class="flourish-embed flourish-hierarchy"
+          data-src="visualisation/20438041"
+        >
+          <script src="https://public.flourish.studio/resources/embed.js"></script>
+          <noscript
+            ><img
+              src="https://public.flourish.studio/visualisation/20438041/thumbnail"
+              width="100%"
+              alt="hierarchy visualization"
+          /></noscript>
+        </div>
+      </div>
+    </div>
+    <!-- new section -->
+    <div class="data1">
+      <div class="data-item1">
+        <div
+          class="flourish-embed flourish-scatter"
+          data-src="visualisation/20438250"
+        >
+          <script src="https://public.flourish.studio/resources/embed.js"></script>
+          <noscript
+            ><img
+              src="https://public.flourish.studio/visualisation/20438250/thumbnail"
+              width="100%"
+              alt="scatter visualization"
+          /></noscript>
+        </div>
+      </div>
+      <div class="data-container1">
+        <h2>
+          Corrélation entre Population et Production de Déchets Plastiques
+        </h2>
+        <p class="text-up-down">
+          Ce nuage de points explore la relation entre la population des pays et
+          leur production de déchets plastiques. Chaque point représente un
+          pays, avec sa position sur l'axe horizontal indiquant sa population et
+          l'axe vertical représentant la quantité de déchets plastiques qu'il
+          génère. La visualisation permet de mettre en évidence les disparités
+          et les tendances : certains pays produisent proportionnellement plus
+          de déchets plastiques que leur population le suggérerait, tandis que
+          d'autres semblent avoir une production plus modérée. Cette
+          représentation graphique offre une perspective visuelle claire sur
+          l'impact environnemental des différentes nations, révélant des schémas
+          complexes de consommation et de production de plastique à l'échelle
+          mondiale.
+        </p>
+      </div>
+    </div>
+    <div class="dashboard">
+      <h1>Global Plastic Waste Statistics</h1>
+
+      <div class="chart-row">
+        <div class="chart-container chart-box">
+          <h2>Pays Produisant le Plus de Déchets Plastiques</h2>
+          <canvas id="countryChart"></canvas>
+          <p class="description">
+            Ce graphique en barres montre les cinq pays les plus grands
+            producteurs de déchets plastiques dans le monde. La Chine arrive en
+            tête avec 8,82 millions de tonnes métriques par an, suivie par
+            l'Indonésie avec 3,22 millions. Ces chiffres mettent en évidence les
+            contributions importantes de ces pays à la pollution plastique
+            mondiale.
+          </p>
+        </div>
+
+        <div class="chart-container chart-box">
+          <h2>Répartition des Déchets Plastiques par Type</h2>
+          <canvas id="typeChart"></canvas>
+          <p class="description">
+            Ce graphique en secteurs illustre la répartition des déchets
+            plastiques par type. Les plastiques à usage unique représentent 40 %
+            du total, tandis que les emballages en constituent 30 %. Les
+            produits de consommation et les plastiques industriels contribuent à
+            15 % et 10 %, respectivement, avec 5 % pour d'autres types.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+      // Country Data
+      const countryChart = new Chart(document.getElementById("countryChart"), {
+        type: "bar",
+        data: {
+          labels: ["China", "Indonesia", "Philippines", "Vietnam", "Thailand"],
+          datasets: [
+            {
+              label: "Million Metric Tons per Year",
+              data: [8.82, 3.22, 1.88, 1.83, 1.03],
+              backgroundColor: " #52b788",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+          },
+        },
+      });
+
+      // Waste Type Data
+      const typeChart = new Chart(document.getElementById("typeChart"), {
+        type: "pie",
+        data: {
+          labels: [
+            "Single-use",
+            "Packaging",
+            "Consumer Products",
+            "Industrial",
+            "Other",
+          ],
+          datasets: [
+            {
+              data: [40, 30, 15, 10, 5],
+              backgroundColor: [
+                "#97D2FB",
+                "#83BCFF",
+                "#ECCBD9",
+                "#80FFE8",
+                "#cdb4db",
+              ],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "right",
+            },
+          },
+        },
+      });
+    </script>
+
+    <section class="testimonial-section">
+      <div class="testimonial-content">
+        <p class="section-heading">SO WHAT CAN WE DO?</p>
+        <blockquote class="testimonial-quote">
+          “Choisir une vie sans plastique ne se résume pas à réduire les déchets
+        , c'est aussi créer un effet d'entraînement. Chaque petit changement
+          que nous faisons inspire les autres à faire de même. Ensemble, ces
+          actions s’additionnent pour former un mouvement capable d’inverser la
+          tendance de la pollution, de restaurer nos écosystèmes et de bâtir un
+          avenir durable pour tous.”
+        </blockquote>
+        <p class="author">
+          — Phuong Nguyen • Master CEN • Université de Paris 8
+        </p>
+      </div>
+    </section>
+  </body>
+</html>

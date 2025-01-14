@@ -1,0 +1,824 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-attachment: fixed;
+  color: hsl(0, 0%, 0%);
+  transition: background-color 0.5s ease;
+  overflow-x: hidden; /* Empêche le défilement horizontal */
+  cursor: none;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(https://assets.iceable.com/img/noise-transparent.png);
+  opacity: 0.6; /* Ajustez l'opacité selon vos besoins */
+  pointer-events: none; /* Empêche les interactions avec le pseudo-élément */
+  z-index: 9999; /* Assure que le grain est au-dessus de tout le contenu */
+  cursor: none;
+}
+#circle-cursor {
+  width: 20px; /* Diamètre du cercle */
+  height: 20px;
+  border-radius: 50%; /* Rend l'élément circulaire */
+  position: absolute; /* Positionné en fonction de la souris */
+  pointer-events: none; /* Ignore les interactions */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Centre le cercle par rapport à la souris */
+  z-index: 10000; /* Plus élevé que le pseudo-élément */
+  background-color: #0054a4; /* Couleur #002446 semi-transparent */
+  box-shadow: 0 0 10px #0054a4, 0 0 20px rgba(0, 36, 70, 0.3); /* Ajoute des ombres */
+  transition: transform 1s ease-out;
+}
+
+#circle-cursor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(0, 36, 70, 0.3); /* Couleur #002446 */
+  transform: scale(1.5);
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+#circle-cursor.trail {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+#circle-cursor.trail::after {
+  opacity: 1;
+  transform: scale(2.5);
+}
+@keyframes grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(100%, 100%);
+  }
+}
+.first-container {
+  display: flex; /* Utilise Flexbox pour centrer le contenu */
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  max-height: 900px;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex: 1;
+  transition: filter 0.5s ease;
+  position: relative;
+  border-bottom: 1px solid #98a7be;
+}
+
+.logo {
+  width: 60px;
+  height: auto;
+  margin: 10px;
+}
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espace entre le logo et les éléments de la navbar */
+  padding: 0 10px; /* Ajoute un padding pour espacer les éléments du bord */
+  border-bottom: 1px solid #98a7be; /* Bordure inférieure en #042449 */
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Permet à la liste de prendre tout l'espace disponible */
+}
+
+.nav-item {
+  margin-left: 20px; /* Espace entre les éléments de la navbar */
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: #042449;
+  font-size: 1em;
+  font-weight: 400;
+  display: block;
+  font-family: "IBM Plex Sans", sans-serif;
+  border-bottom: 2px solid transparent; /* Bordure inférieure transparente par défaut */
+  transition: border-bottom 0.3s ease; /* Transition pour l'effet de survol */
+}
+
+.nav-item a:hover {
+  color: #124475;
+  border-bottom: 1px solid #1c3851; /* Bordure inférieure en #042449 au survol */
+}
+
+/* Styles pour le menu caché */
+.hidden-menu {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Cache le menu à droite */
+  width: 250px;
+  height: 100%;
+  background-color: rgba(
+    4,
+    36,
+    73,
+    0.8
+  ); /* Couleur de fond avec transparence */
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.menu-item {
+  margin: 20px 0;
+}
+
+.menu-item a {
+  text-decoration: none;
+  color: white;
+  font-size: 1em;
+  font-weight: 500;
+  display: block;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.menu-item a:hover {
+  color: #1f9ea5;
+}
+
+.menu-toggle {
+  background-color: transparent;
+  color: #002446;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 1001;
+  margin-right: 40px; /* Espace entre le bouton et les éléments de la navbar */
+}
+.scroll-down {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  text-align: center;
+  display: flex; /* Utilise Flexbox pour centrer les éléments */
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: center; /* Centre horizontalement */
+  justify-content: center; /* Centre verticalement */
+}
+
+.scroll-down span {
+  color: #195bc4;
+  margin-bottom: 8px;
+  display: block;
+  text-align: center;
+}
+
+.arrows {
+  width: 32px;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid #195bc4;
+  border-bottom: 2px solid #195bc4;
+  transform: rotate(45deg);
+  margin-top: -8px;
+  animation: bounce 2s infinite;
+}
+
+.arrow:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.arrow:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-5px, -5px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+}
+.gallery-up-down {
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: center; /* Aligne les éléments au centre */
+  width: 100%;
+  justify-content: center;
+  background-color: white;
+  margin-bottom: 40px;
+}
+@keyframes upDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.gallery-up-down {
+  animation: upDown 20s ease-in-out infinite;
+}
+.gallery-up-down h2 {
+  font-size: 5rem;
+  color: #195bc4;
+  font-family: "Playfair", serif;
+  font-weight: 600;
+  text-align: center;
+  margin: 0; /* Supprime la marge par défaut */
+  padding-bottom: 10px; /* Ajoute un espace en bas du titre */
+  line-height: 1; /* Ajuste la hauteur de ligne */
+}
+
+.gallery-up-down p {
+  font-size: 1.2rem;
+  color: #195bc4;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  text-align: center;
+  opacity: 0.9;
+  justify-content: center;
+  align-items: center;
+  margin: 0; /* Supprime la marge par défaut */
+  padding: 0; /* Supprime le padding par défaut */
+}
+.gallery-text {
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: center; /* Aligne les éléments au début de la section */
+  padding: 60px;
+}
+.gallery-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.gallery-item {
+  flex: 1;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.facts-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.fact-item {
+  margin-bottom: 3rem;
+  max-width: 300px;
+  position: relative;
+}
+
+.fact-number {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #d26c91;
+  opacity: 0.8;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+.fact-number::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px; /* Độ dài đường gạch */
+  height: 3px; /* Độ dày đường gạch */
+  background-color: #d26c91; /* Màu đường gạch */
+}
+
+.fact-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #195bc4;
+  font-weight: 350;
+  opacity: 0.9;
+  font-family: "Noto Sans JP", sans-serif;
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+/* Position spécifique pour chaque fact */
+.fact-01 {
+  position: absolute;
+  left: 5%;
+  top: 25%;
+}
+
+.fact-02 {
+  position: absolute;
+  left: 15%;
+  top: 50%;
+}
+
+.fact-03 {
+  position: absolute;
+  left: 5%;
+  top: 75%;
+}
+
+/* Style différent pour les facts de droite */
+.fact-04 {
+  position: absolute;
+  right: 5%;
+  top: 25%;
+}
+.fact-05 {
+  position: absolute;
+  right: 15%;
+  top: 50%;
+}
+.fact-06 {
+  position: absolute;
+  right: 5%;
+  top: 75%;
+}
+
+@media (max-width: 1200px) {
+  .gallery-container {
+    flex-direction: column;
+  }
+
+  .gallery-item {
+    max-width: 100%;
+    order: -1; /* Place l'image en premier sur mobile */
+  }
+}
+
+.new-section {
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: center; /* Aligne les éléments au début de la section */
+  padding: 60px;
+  width: 100%;
+  justify-content: center;
+  background-color: #e9cadc;
+  border-bottom: 1px solid #98a7be;
+}
+
+.presentation {
+  display: flex;
+  align-items: center; /* Aligne verticalement au centre */
+  justify-content: center;
+  text-align: center;
+}
+
+.presentation h1 {
+  font-family: "Playfair", serif;
+  font-size: 3.5rem;
+  color: #0054a4;
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  line-height: 1.2em !important;
+  margin-top: 20px;
+}
+
+.content p {
+  margin: 0; /* Supprime les marges par défaut du paragraphe */
+  font-size: 1.3rem;
+  color: #195bc4;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 350;
+  font-style: italic;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 40px;
+  opacity: 1;
+  margin-top: 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.5em !important;
+}
+.content {
+  height: 65vh;
+  width: 100%;
+  display: flex;
+  align-items: center; /* Aligne verticalement au centre */
+  justify-content: center;
+  text-align: left;
+}
+.left-side {
+  width: 50%;
+  height: 120%;
+  background-image: url("../images/img2.JPG");
+  background-size: 50% auto;
+  background-attachment: fixed;
+  border-right: 1px solid #98a7be; /* Ajoute une bordure droite */
+  padding-right: 20px; /* Ajoute un padding à droite pour espacer le contenu de la bordure */
+}
+
+.right-side {
+  margin: 40px;
+  width: 50%;
+  height: 100%;
+  padding-left: 20px;
+}
+
+.content .image {
+  max-width: 700px; /* Ajustez la taille de l'image selon vos besoins */
+  height: auto;
+  filter: grayscale(40%); /* Convertit l'image en noir et blanc */
+}
+
+.text-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.btn {
+  color: #c5d6f0; /* Couleur du texte */
+  background-color: #195bc4;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 1rem; /* Taille de la police */
+  padding: 10px 20px; /* Espacement interne */
+  border-radius: 24px; /* Coins arrondis */
+  border-color: #195bc4;
+  cursor: pointer; /* Curseur en forme de main */
+  text-align: center; /* Alignement du texte */
+  text-decoration: none; /* Pas de soulignement */
+  display: block; /* Affichage en bloc */
+  margin-top: 40px; /* Espace au-dessus du bouton */
+  text-transform: uppercase;
+}
+
+.data-container {
+  width: 50%; /* Ajustez la largeur selon vos besoins */
+  margin-right: 100px; /* Espace entre le conteneur et les autres éléments */
+  margin-left: 60px;
+  margin-top: 100px;
+}
+.data-container p {
+  font-size: 1.2rem;
+  color: #195bc4;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 350;
+  text-align: left;
+  opacity: 1;
+  margin-top: 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.3em !important;
+}
+
+.data-container h2 {
+  font-size: 3.5rem;
+  color: #195bc4;
+  font-family: playfair, serif;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.2em !important;
+}
+
+.data-item {
+  padding: 20px;
+  margin: 40px;
+  width: 700px;
+  height: auto;
+  overflow: hidden;
+}
+.data {
+  display: flex; /* Utilise flexbox pour aligner les éléments */
+  align-items: flex-start; /* Aligne les éléments au début de la section */
+  padding: 20px;
+  margin-top: 40px;
+  text-align: left;
+  width: 100%;
+}
+.data1 {
+  display: flex; /* Utilise flexbox pour aligner les éléments */
+  align-items: flex-start; /* Aligne les éléments au début de la section */
+  padding: 20px;
+  margin-top: 40px;
+  text-align: left;
+  width: 100%;
+  background-color: #e1e6ec;
+}
+.data-item1 {
+  padding: 20px;
+  margin: 40px;
+  width: 700px;
+  height: auto;
+  overflow: hidden; /* Pour s'assurer que les éléments flottants sont contenus */
+}
+
+.data-container1 {
+  width: 50%; /* Ajustez la largeur selon vos besoins */
+  margin-right: 40px; /* Espace entre le conteneur et les autres éléments */
+  margin-left: 60px;
+  margin-top: 100px;
+}
+.data-container1 p {
+  font-size: 1.2rem;
+  color: #195bc4;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 350;
+  text-align: left;
+  opacity: 1;
+  margin-top: 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.3em !important;
+}
+.data-container1 h2 {
+  font-size: 3.5rem;
+  color: #195bc4;
+  font-family: "Playfair", serif;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.2em !important;
+}
+
+
+.marquee {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background-color: #002446;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: center; /* Aligne les éléments au début de la section */
+  padding: 30px;
+}
+.marquee p {
+  display: inline-block;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 3rem;
+  color: #c5d6f0;
+  margin: 0;
+  text-transform: uppercase;
+}
+.marquee-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.third-section {
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: center; /* Centre les éléments horizontalement */
+  padding: 20px;
+  width: 100vw;
+  margin: 0;
+  box-sizing: border-box;
+  justify-content: center;
+  background-color: #c5d6f0;
+  border-bottom: 1px solid #98a7be;
+}
+
+.third-container {
+  text-align: center; /* Centre le contenu textuel */
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: center; /* Centre les éléments horizontalement */
+  justify-content: center; /* Centre les éléments verticalement */
+  padding: 20px;
+  width: 100%;
+}
+
+.third-container p {
+  font-size: 1.5rem;
+  color: #195bc4;
+  margin-bottom: 50px;
+  font-family: "Not Sans JP", sans-serif;
+  line-height: 1.5; /* Améliore la lisibilité */
+  z-index: 1; /* Assure que le texte est au-dessus de la vidéo */
+  text-transform: uppercase;
+  padding: 0 50px 0 50px;
+}
+
+#myVideo {
+  padding-bottom: 40px;
+  width: 90%; /* La vidéo occupe 100% de la largeur disponible */
+  height: auto; /* Maintient le rapport d'aspect */
+  border-radius: 4px; /* Coins arrondis */
+  transition: filter 0.5s ease; /* Animation fluide pour l'effet */
+  filter: grayscale(20%); /* Applique un effet de gris de 20% */
+}
+@media (max-width: 768px) {
+  .third-container p {
+    font-size: 1.5rem; /* Réduit la taille de la police pour les petits écrans */
+    margin-bottom: 30px;
+  }
+
+  #myVideo {
+    width: 100%; /* Toujours 100% même sur les petits écrans */
+  }
+}   
+.dashboard {
+  max-width: 1200px;
+  padding: 20px;
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 50px;
+}
+.dashboard h1 {
+  font-size: 3.5rem;
+  color: #195bc4;
+  font-family: "Playfair", serif;
+  font-weight: 500;
+  margin-bottom: 60px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.chart-container {
+  background: white;
+  border-radius: 8px;
+  border: 0.5px solid #002446;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 500px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+
+}
+
+.chart-row {
+  display: flex;
+  gap: 60px; 
+  margin-bottom: 20px;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .chart-row {
+    flex-direction: column;
+  }
+}
+.chart-box {
+  flex: 1;
+  min-height: 300px;
+}
+h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+}
+h2 {
+  color: #195bc4;;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  font-family: "Noto Sans JP", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1em !important;
+}
+.description {
+  font-size: 1rem;
+  color: #195bc4;;
+  margin-top: 10px;
+  letter-spacing: -0.03em;
+  line-height: 1.2em !important;
+  text-align: justify;
+  padding: 0 10px;
+}
+@media (max-width: 768px) {
+  .chart-container {
+    width: 90%;
+  }
+
+  .dashboard h1 {
+    font-size: 28px;
+  }
+
+  .chart-container h2 {
+    font-size: 18px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+}
+.testimonial-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 150px;
+  background-color: #c5d6f0;
+  text-align: center;
+}
+
+.testimonial-content {
+    width: 100%;
+}
+
+.section-heading {
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #999;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.testimonial-quote {
+  font-size: 36px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin: 0 0 30px;
+  font-style: uppercase;
+  font-family: "Playfair", serif;
+}
+
+.author {
+  font-size: 16px;
+  color: #666;
+}
